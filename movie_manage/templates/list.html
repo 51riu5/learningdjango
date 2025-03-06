@@ -1,0 +1,39 @@
+{%extends 'blank.html'%}
+
+{%block content%}
+{%load static%}
+
+<h1>List</h1>
+<title>WatchIT!</title>
+
+<h1>Movie List</h1>
+<table border="1">  
+    <tr>
+        <th>Title</th>
+        <th>Actor</th>
+        <th>Actress</th>
+        <th>Poster</th>
+        <th>Year</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    {% for movie in movies %}
+    <tr>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.actor }}</td>
+        <td>{{ movie.actress }}</td>
+        <td>
+            {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" width="100">
+            {% else %}
+                No image available
+            {% endif %}
+        </td>
+        <td>{{ movie.year }}</td>
+        <td><a href="{% url 'edit' movie.pk %}">Edit</a></td>
+        <td><a href="{% url 'delete' movie.pk %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{%endblock content%}
